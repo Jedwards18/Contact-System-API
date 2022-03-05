@@ -1,7 +1,10 @@
 import { states } from './stateNames';
 import { capitalizeFirstLetter } from '../utils/utils';
 import { v4 as uuidv4 } from 'uuid';
-import { IName, IAddress, IPhone, IContact } from './interfaces';
+import { IName } from './interfaces/name';
+import { IAddress } from './interfaces/address';
+import { IPhone } from './interfaces/phone';
+import { IContact } from './interfaces/contact';
 
 export class IncomingContact {
   contactId?: string;
@@ -25,6 +28,7 @@ export class IncomingContact {
     }
 
     phones.forEach(phone => {
+      //Removes any non-digits from the input string and then reformats the phonenumber
       const cleaned = ('' + phone.number).replace(/\D/g, '');
       const match = cleaned.match(/^(\d{3})(\d{3})(\d{4})$/);
       if (match) {

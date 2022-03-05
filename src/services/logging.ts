@@ -35,28 +35,28 @@ export enum LogLevels {
 }
 
 export const logEvent = (level: LogLevels, event: Events, message: string, meta: any = undefined): void => {
-  const mergingObject = { cclevel: level, ccevent: event, ...meta };
+  const eventLevelObject = { cclevel: level, ccevent: event, ...meta };
 
   switch (level) {
     case LogLevels.Fatal:
-      logger.fatal(mergingObject, message);
+      logger.fatal(eventLevelObject, message);
       break;
     case LogLevels.Error:
-      logger.error(mergingObject, message);
+      logger.error(eventLevelObject, message);
       break;
     case LogLevels.Warn:
-      logger.warn(mergingObject, message);
+      logger.warn(eventLevelObject, message);
       break;
     case LogLevels.Info:
-      logger.info(mergingObject, message);
+      logger.info(eventLevelObject, message);
       break;
     case LogLevels.Debug:
-      logger.debug(mergingObject, message);
+      logger.debug(eventLevelObject, message);
       break;
     case LogLevels.Trace:
-      logger.trace(mergingObject, message);
+      logger.trace(eventLevelObject, message);
       break;
     default:
-      logger.info(mergingObject, message);
+      logger.info(eventLevelObject, message);
   }
 };

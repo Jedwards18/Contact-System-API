@@ -1,4 +1,7 @@
-import { IName, IAddress, IPhone, IContact } from './interfaces';
+import { IName } from './interfaces/name';
+import { IAddress } from './interfaces/address';
+import { IPhone } from './interfaces/phone';
+import { IContact } from './interfaces/contact';
 
 export class ContactListEntryResponse {
   contactId: string;

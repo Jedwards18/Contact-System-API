@@ -1,4 +1,6 @@
-import { IName, IPhone, IContact } from './interfaces';
+import { IName } from './interfaces/name';
+import { IContact } from './interfaces/contact';
+import { IPhone } from './interfaces/phone';
 
 export class CallListContact {
   name: IName;

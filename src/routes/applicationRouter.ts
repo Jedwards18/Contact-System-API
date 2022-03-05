@@ -4,7 +4,7 @@ import { db } from '../db';
 import { IncomingContact } from '../models/incomingContact';
 import { ContactListEntryResponse } from '../models/contactListEntryResponse';
 import { CallListContact } from '@/models/callListContact';
-import { IContact } from '../models/interfaces';
+import { IContact } from '../models/interfaces/contact';
 
 const applicationRouter: Router = Router();
 

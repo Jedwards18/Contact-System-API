@@ -1,4 +1,4 @@
-import { IContact } from './interfaces';
+import { IContact } from './interfaces/contact';
 
 export const existingContacts: IContact[] = [
   {
