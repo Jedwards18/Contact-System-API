@@ -1,6 +1,5 @@
-/* eslint-disable no-underscore-dangle */
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import pino from 'pino';
+import { Events, LogLevels } from '@/enums/logging';
 
 const logLevel = process.env.LOG_LEVEL || 'debug';
 
@@ -9,30 +8,6 @@ const logger = pino({
   level: logLevel,
   timestamp: pino.stdTimeFunctions.isoTime,
 });
-
-//Change
-export enum Events {
-  InitializingDatabase = 'InitializingDatabase',
-  SeedingCollection = 'SeedingCollection',
-  GetContacts = 'GetContacts',
-  GetSpecificContact = 'GetSpecificContact',
-  GetCallList = 'GetCallList',
-  DeleteContact = 'DeleteContact',
-  CreateNewContact = 'CreateNewContact',
-  UpdateContact = 'UpdateContact',
-  InputError = 'InputError',
-  SigTerm = 'SigTerm',
-  Other = 'Other',
-}
-
-export enum LogLevels {
-  Fatal = 'fatal',
-  Error = 'error',
-  Warn = 'warn',
-  Info = 'info',
-  Debug = 'debug',
-  Trace = 'trace',
-}
 
 export const logEvent = (level: LogLevels, event: Events, message: string, meta: any = undefined): void => {
   const eventLevelObject = { cclevel: level, ccevent: event, ...meta };

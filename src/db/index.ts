@@ -1,6 +1,8 @@
 import loki from 'lokijs';
 import { existingContacts } from '../models/exampleContacts';
-import { logEvent, Events, LogLevels } from '../services/logging';
+import { logEvent } from '../services/logger';
+import { Events, LogLevels } from '../enums/logging'
+
 
 const db = new loki('contactsystem.db', {
   autoload: true,

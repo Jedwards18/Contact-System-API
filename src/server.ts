@@ -1,23 +1,16 @@
 import express from 'express';
 import * as http from 'http';
 import cors from 'cors';
-
-import applicationRouter from './routes/applicationRouter';
-import { logEvent, Events, LogLevels } from './services/logging';
-
-if (!process.env.NODE_ENV) {
-  console.error(
-    'NO ENVIRONMENT SET. You can set your machine\'s NODE_ENV by setting the Windows Environment Variables PATH \n EG NODE_ENV=development \n $env:NODE_ENV="development" ',
-  );
-  process.exit(0);
-}
+import contactsRouter from './routes/contactsRouter';
+import { logEvent } from './services/logger';
+import { Events, LogLevels } from './enums/logging';
 
 const app = express();
-app.use(cors()); //check on this
-app.use(express.urlencoded({ extended: true })); //check on this
-app.use(express.json({ limit: '3.5MB' })); //check on this
+app.use(cors());
+app.use(express.urlencoded({ extended: true }));
+app.use(express.json({ limit: '3.5MB' }));
 
-app.use('/', applicationRouter);
+app.use('/', contactsRouter);
 
 //error handler
 app.use((error, req, res, next) => {

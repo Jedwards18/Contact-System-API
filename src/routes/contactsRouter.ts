@@ -1,18 +1,19 @@
 import { Router, Request, Response } from 'express';
-import { logEvent, Events, LogLevels } from '../services/logging';
+import { logEvent } from '../services/logger';
+import { Events, LogLevels } from '../enums/logging'
 import { db } from '../db';
 import { IncomingContact } from '../models/incomingContact';
 import { ContactListEntryResponse } from '../models/contactListEntryResponse';
 import { CallListContact } from '@/models/callListContact';
 import { IContact } from '../models/interfaces/contact';
 
-const applicationRouter: Router = Router();
+const contactsRouter: Router = Router();
 
-applicationRouter.get('/', async (req: Request, res: Response) => {
+contactsRouter.get('/', async (req: Request, res: Response) => {
   res.send('Connected...');
 });
 
-applicationRouter.get('/contacts', async (req: Request, res: Response) => {
+contactsRouter.get('/contacts', async (req: Request, res: Response) => {
   logEvent(LogLevels.Info, Events.GetContacts, 'Getting existing contacts');
   try {
     const contactsCollection = await db.getCollection('contacts');
@@ -35,7 +36,7 @@ applicationRouter.get('/contacts', async (req: Request, res: Response) => {
   }
 });
 
-applicationRouter.post('/contacts', async (req: Request, res: Response) => {
+contactsRouter.post('/contacts', async (req: Request, res: Response) => {
   logEvent(LogLevels.Info, Events.CreateNewContact, 'Creating new contact');
 
   try {
@@ -64,7 +65,7 @@ applicationRouter.post('/contacts', async (req: Request, res: Response) => {
   }
 });
 
-applicationRouter.put('/contacts/id/:id', async (req: Request, res: Response) => {
+contactsRouter.put('/contacts/:id', async (req: Request, res: Response) => {
   const id = req.params.id;
   logEvent(LogLevels.Info, Events.UpdateContact, `Updating specified contact: ${id}`);
 
@@ -95,7 +96,7 @@ applicationRouter.put('/contacts/id/:id', async (req: Request, res: Response) =>
   }
 });
 
-applicationRouter.get('/contacts/id/:id', async (req: Request, res: Response) => {
+contactsRouter.get('/contacts/id/:id', async (req: Request, res: Response) => {
   const id = req.params.id;
   logEvent(LogLevels.Info, Events.GetSpecificContact, `Getting specified contact: ${id}`);
 
@@ -116,7 +117,7 @@ applicationRouter.get('/contacts/id/:id', async (req: Request, res: Response) =>
   }
 });
 
-applicationRouter.delete('/contacts/id/:id', async (req: Request, res: Response) => {
+contactsRouter.delete('/contacts/:id', async (req: Request, res: Response) => {
   const id = req.params.id;
   logEvent(LogLevels.Info, Events.DeleteContact, `Deleting contact: ${id} `);
 
@@ -138,7 +139,7 @@ applicationRouter.delete('/contacts/id/:id', async (req: Request, res: Response)
   }
 });
 
-applicationRouter.get('/contacts/call-list', async (req: Request, res: Response) => {
+contactsRouter.get('/contacts/call-list', async (req: Request, res: Response) => {
   logEvent(LogLevels.Info, Events.GetCallList, 'Retrieving call list');
 
   try {
@@ -157,4 +158,4 @@ applicationRouter.get('/contacts/call-list', async (req: Request, res: Response)
   }
 });
 
-export default applicationRouter;
+export default contactsRouter;

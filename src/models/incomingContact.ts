@@ -1,5 +1,5 @@
 import { states } from './stateNames';
-import { capitalizeFirstLetter } from '../utils/utils';
+import { capitalizeFirstLetter } from '../utils/stringFormattingUtils';
 import { v4 as uuidv4 } from 'uuid';
 import { IName } from './interfaces/name';
 import { IAddress } from './interfaces/address';
